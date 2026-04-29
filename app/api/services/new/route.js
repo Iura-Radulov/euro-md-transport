@@ -1,7 +1,6 @@
 import { connectToDB } from "@/utils/database";
 import Service from "@/models/service";
-import { writeFile } from 'fs/promises'
-import path from "path";
+
 
 export const POST = async (request) => {
     // const { nameEn, nameRo, nameRu, category } = await request.json();
