@@ -1,0 +1,54 @@
+{
+  "HomePage": {
+    "title": "TRANSPORT DE PASAGERI",
+    "description": "MOLDOVA - GERMANIA - ROMÂNIA"
+  },
+
+  "nav": {
+    "services": "Servicii",
+    "about": "Despre noi",
+    "contact": "Contacte",
+    "contactUs": "Contactează-ne"
+  },
+
+  "form": {
+    "from": "From",
+    "to": "To",
+    "phone": "Phone",
+    "select_from": "Select from where",
+    "select_to": "Select your destination",
+    "write_phone": "Write your phone number"
+  },
+
+  "i_offer": "Oferuję",
+  "i_search": "Szukam",
+  "hello": "Witaj świecie",
+  "createTask": "Utwórz zadanie",
+  "findTask": "Znajdź zadanie",
+  "signIn": "Sign In",
+  "loginModalTitle": "Sign in to our platform",
+  "registerModalTitle": "Create account",
+  "emailLabel": "Your email",
+  "nameLabel": "Your name",
+  "passwordLabel": "Your password",
+  "logInBtn": "Log in",
+  "notRegistered": "Not registered",
+  "createAccount": "Create account",
+  "haveAccount": "I have an account",
+  "logIn": "Log In",
+  "orSocial": "Or social",
+  "welcome": "Cześć",
+  "save": "Ratować",
+  "aboutMe": "O mnie",
+  "personalData": "Dane osobiste",
+  "changePassword": "Zmień hasło",
+  "yourName": "Twoje imię",
+  "yourEmail": "Twój email",
+  "yourPhone": "Twój telefon",
+  "newPassword": "Nowe hasło",
+  "repeatPassword": "Powtórz hasło",
+  "noConfirm": "Passwords do not match",
+  "city": "City",
+  "successUpdatePassword": "Your password was updated successfully",
+  "aboutMeSomething": "Trochę o sobie"
+}
