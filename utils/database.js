@@ -9,7 +9,7 @@ export const connectToDB = async () =>{
         return;
     }
     try{
-        await mongoose.connect(process.env.MONGODB2_URI, {
+        await mongoose.connect(process.env.MONGODB2_MONGODB_URI, {
             dbName: "euro_md_transport",
             // useNewUrlParser: true,
             // useUnifieldTopology: true
