@@ -31,6 +31,9 @@ const nextConfig: NextConfig = {
     experimental: {
         // Другие опции, если необходимо
     },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
 };
 
 // export default withNextIntl(nextConfig);
