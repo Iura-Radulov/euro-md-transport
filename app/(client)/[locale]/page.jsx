@@ -21,7 +21,7 @@ export default function HomePage() {
                 <p className={'text-base md:text-3xl'}>{message("description")}</p>
             </div>
         </section>
-        <section className={"container mx-auto py-10 px-4"}>
+        <section className={"container mx-auto py-10 lg:py-16 px-4"}>
             <TransportForm/>
 
         </section>
