@@ -7,7 +7,8 @@ import bcrypt from "bcrypt";
 
 export const authOptions = {
     pages: {
-        signIn: '/',
+        // user sign-in route used by NextAuth when redirecting unauthenticated users
+        signIn: '/log-in',
     },
     providers: [
         GoogleProvider({
@@ -20,26 +21,54 @@ export const authOptions = {
         }),
         CredentialsProvider ({
             async authorize(credentials) {
-                const user = await User.findOne({email: credentials.email});
-                if (!user || !user.password) return null;
+                // ensure DB connected before querying
+                try {
+                    await connectToDB();
+                } catch (e) {
+                    console.log('connectToDB failed in authorize:', e);
+                    return null;
+                }
 
-                const passwordsMatch = await bcrypt.compare(
-                    credentials.password,
-                    user.password,
-                );
+                try {
+                    const user = await User.findOne({email: credentials.email});
+                    if (!user || !user.password) return null;
 
-                if (passwordsMatch) return user;
-                return null;
+                    const passwordsMatch = await bcrypt.compare(
+                        credentials.password,
+                        user.password,
+                    );
+
+                    if (passwordsMatch) return user;
+                    return null;
+                } catch (e) {
+                    console.log('Error querying user in authorize:', e);
+                    return null;
+                }
             },
         })
     ],
     callbacks: {
         async session({session, token}) {
+            // ensure DB connected before querying
+            try {
+                await connectToDB();
+            } catch (e) {
+                console.log('connectToDB failed in session callback:', e);
+                return session;
+            }
+
             if (token.sub && session.user) {
                 session.user.id = token.sub;
             }
-            const sessionUser = await User.findOne({ email: session.user.email });
-            session.user.id = sessionUser._id.toString();
+
+            try {
+                const sessionUser = await User.findOne({ email: session.user.email });
+                if (sessionUser && sessionUser._id) {
+                    session.user.id = sessionUser._id.toString();
+                }
+            } catch (e) {
+                console.log('Error querying session user:', e);
+            }
 
             if (session.user) {
                 session.user.name = token.name;
@@ -85,15 +114,27 @@ export const authOptions = {
             if (token) return true;
         },
         async jwt({ token }) {
-            if (!token.sub) return token;
-            const existingUser = await User.findOne({email: token.email});
-            if (!existingUser) return token;
+            // ensure DB connected before querying
+            try {
+                await connectToDB();
+            } catch (e) {
+                console.log('connectToDB failed in jwt callback:', e);
+                return token;
+            }
 
-            token.name = existingUser.name;
-            token.email = existingUser.email;
-            token.role = existingUser.role;
-            token.phone = existingUser.phone;
-            token.image = existingUser.image;
+            if (!token.sub) return token;
+            try {
+                const existingUser = await User.findOne({email: token.email});
+                if (!existingUser) return token;
+
+                token.name = existingUser.name;
+                token.email = existingUser.email;
+                token.role = existingUser.role;
+                token.phone = existingUser.phone;
+                token.image = existingUser.image;
+            } catch (e) {
+                console.log('Error querying user in jwt callback:', e);
+            }
 
             return token;
         }
