@@ -3,14 +3,27 @@
 
 import LocaleSwitcher from './LocaleSwitcher';
 import ThemeSwitcher from "./ThemeSwitcher";
-import { Dropdown, DropdownItem, Label, Select , Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle } from "flowbite-react";
+import {
+    Dropdown,
+    DropdownItem,
+    Label,
+    Select,
+    Navbar,
+    NavbarBrand,
+    NavbarCollapse,
+    NavbarLink,
+    NavbarToggle,
+    Tooltip, DarkThemeToggle
+} from "flowbite-react";
 
 import Image from "next/image";
 import logoImage from '@/public/assets/images/MaimLogo.jpg';
+import logoImageBlack from '@/public/assets/images/logo_black.jpg';
 import {Link} from "@/i18n/navigation";
 import { MdOutlinePhone } from "react-icons/md";
 export default function MainHeader({ lang, messages }) {
     const dict =messages.nav;
+
   return (
     <header className='bg-white dark:bg-gray-800 border-b-2 border-neutral-400'>
       <div className='container mx-auto py-4 px-4'>
@@ -23,7 +36,15 @@ export default function MainHeader({ lang, messages }) {
                       height='auto'
                       alt='loader'
                       loading="eager"
-                      className='object-contain'
+                      className='object-contain dark:hidden'
+                  />
+                  <Image
+                      src={logoImageBlack}
+                      width={250}
+                      height='auto'
+                      alt='loader'
+                      loading="eager"
+                      className='object-contain hidden dark:block'
                   />
 
               </NavbarBrand>
@@ -38,9 +59,9 @@ export default function MainHeader({ lang, messages }) {
                   </NavbarLink>
               </NavbarCollapse>
               <div className='my-3 md:my-0 flex items-center gap-3'>
-                  <Link href={'tel.:+37379857690'} className={'flex items-center col-4 row'}>
+                  <Link href={'tel.:+37367170409'} className={'flex items-center col-4 row'}>
                       <MdOutlinePhone className="text-gray-700 dark:text-gray-400" size={24}  />
-                         <span className='hidden md:block ml-2 text-lg text-gray-700 dark:text-gray-400 '>(+373) 79-85790</span>
+                         <span className='hidden md:block ml-2 text-lg text-gray-700 dark:text-gray-400 '>(+373) 671 70 409</span>
                   </Link>
 
                   <div className='flex items-center md:justify-between row '>

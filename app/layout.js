@@ -39,7 +39,7 @@ export default async function RootLayout({ children, params }) {
             <ThemeModeScript/>
             <title>{metadata.title}</title>
         </head>
-        <body className={twMerge("bg-gray-50 dark:bg-gray-900", inter.className)}>
+        <body className={twMerge("bg-gray-50 dark:bg-gray-800", inter.className)}>
         <ThemeProvider theme={customTheme} applyTheme={applyTheme}>
             {/*<Provider session={session}>*/}
                 {children}

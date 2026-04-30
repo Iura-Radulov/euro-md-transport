@@ -1,21 +1,59 @@
 "use client";
 import {Button, Label, TextInput, Select, TableHeadCell} from "flowbite-react";
-import {FaBackward} from "react-icons/fa";
-
-
-
 import Image from "next/image";
-import {useState} from "react";
-import {useTranslations} from "next-intl";
+import {useEffect, useState} from "react";
+import {useLocale, useTranslations} from "next-intl";
+import getName from "@/utils/getNameByLanguage";
 
 
 export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setNameRu, setNameRo}){
     const message = useTranslations("form");
+    const locale = useLocale();
 
     const [fromDestination, setFromDestination] = useState('');
     const [toDestination, setToDestination] = useState('');
     const [phone, setPhone] = useState('');
+    const [locationsMoldova, setLocationsMoldova] = useState([]);
+    const [locationsEuropa, setLocationsEuropa] = useState([]);
 
+
+    useEffect(()=>{
+
+        const fetchMoldovaData =async ()=>{
+            try {
+                const res = await fetch(`/api/locations-moldova`);
+                if (!res.ok) {
+                    throw new Error(`API error: ${res.status} ${res.statusText}`);
+                }
+                const data = await res.json();
+                console.log(data)
+                setLocationsMoldova(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error('Failed to fetch items:', error);
+                setLocationsMoldova([]); // fallback to empty list
+            }
+        }
+        const fetchEuropaData =async ()=>{
+            try {
+                const res = await fetch(`/api/locations-europa`);
+                if (!res.ok) {
+                    throw new Error(`API error: ${res.status} ${res.statusText}`);
+                }
+                const data = await res.json();
+                console.log(data)
+                setLocationsEuropa(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error('Failed to fetch items:', error);
+                setLocationsEuropa([]); // fallback to empty list
+            }
+        }
+
+
+        fetchMoldovaData();
+        fetchEuropaData();
+
+
+    }, [])
     function handleSubmit(event){
         event.preventDefault()
         console.log("submit")
@@ -38,10 +76,10 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
                             required
                         >
                             <option value="">{message("select_from")}</option>
-                            <option value="chisinau">Chisinau</option>
-                            <option value="comrat">Comrat</option>
-                            <option value="ceadir">Ceadir-Lunga</option>
-                            <option value="vulcanesti">Vulcanesti</option>
+                            {locationsMoldova.map((location) => (
+                                <option key={location._id} value={location._id}>{getName(locale, location.nameRu, location.nameEn, location.nameRo ) }</option>
+                            ))}
+
                         </Select>
 
                     </div>
@@ -56,8 +94,10 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
                             required
                         >
                             <option value="">{message("select_to")}</option>
-                            <option value="germany">Germany</option>
-                            <option value="romania">Romania</option>
+                            {locationsEuropa.map((location) => (
+                                <option key={location._id} value={location._id}>{getName(locale, location.nameRu, location.nameEn, location.nameRo )}</option>
+                            ))}
+
 
                         </Select>
                     </div>
@@ -77,7 +117,7 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
 
                     <div className={'px-5 flex items-center justify-center'}>
                         <Button pill type={'submit'} className={'w-3/4'}>
-                            Send
+                            {message("submit")}
                         </Button>
                     </div>
 

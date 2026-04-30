@@ -1,4 +1,4 @@
-export default function getName(lang, nameEn, nameRo, nameRu) {
+export default function getName(lang,nameRu, nameEn, nameRo ) {
     let name = '';
     switch (lang) {
         case 'en': name=nameEn;
