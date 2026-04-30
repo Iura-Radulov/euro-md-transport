@@ -17,6 +17,21 @@
     "select_from": "Select from where",
     "select_to": "Select your destination",
     "write_phone": "Write your phone number",
-    "submit": "Submit"
+    "submit": "Submit",
+    "name": "Name",
+    "write_name": "Write your name",
+     "email": "Email",
+     "write_email": "Write your email",
+    "message": "Message"
+
+  },
+  "ContactPage": {
+    "title": "Contacts",
+    "description": "We are here to help.",
+    "contactInfo": "Contact us for more information about our services, pricing, and availability.",
+    "phone": "Phone",
+    "contactForm": "Contact Us now",
+    "email": "Email",
+    "address": "Address"
   }
 }

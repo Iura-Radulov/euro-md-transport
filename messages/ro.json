@@ -18,7 +18,21 @@
     "select_from": "Selectați de unde ",
     "select_to": "Selectați unde doriți ",
     "write_phone": "Introduceți numărul de telefon",
-    "submit": "Trimite"
+    "submit": "Trimite",
+    "name": "Nume",
+    "write_name": "Introduceți numele",
+    "email": "Email",
+    "write_email": "Introduceți emailul",
+    "message": "Mesaj"
+  },
+  "ContactPage": {
+    "title": "Contacte",
+    "description": "Suntem aici pentru a vă ajuta.",
+    "contactInfo": "Contactați-ne pentru mai multe informații despre serviciile noastre, prețuri și disponibilitate.",
+    "phone": "Telefon",
+    "contactForm": "Contactați-ne acum",
+    "email": "Email",
+    "address": "Adresă"
   }
 
 

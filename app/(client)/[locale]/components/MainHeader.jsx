@@ -57,12 +57,15 @@ export default function MainHeader({ lang, messages }) {
                   <NavbarLink className='text-lg' href={'/about'}>
                       {dict.about}
                   </NavbarLink>
+                  <NavbarLink className='text-lg' href={'/contacts'}>
+                      {dict.contact}
+                  </NavbarLink>
               </NavbarCollapse>
               <div className='my-3 md:my-0 flex items-center gap-3'>
-                  <Link href={'tel.:+37367170409'} className={'flex items-center col-4 row'}>
-                      <MdOutlinePhone className="text-gray-700 dark:text-gray-400" size={24}  />
-                         <span className='hidden md:block ml-2 text-lg text-gray-700 dark:text-gray-400 '>(+373) 671 70 409</span>
-                  </Link>
+                  <a href="tel:+37367170409" className={'flex items-center col-4 row text-gray-700 dark:text-gray-400'}>
+                      <MdOutlinePhone className="" size={24}  />
+                       <span className='hidden md:block ml-2 text-lg '>(+373) 671 70 409</span>
+                  </a>
 
                   <div className='flex items-center md:justify-between row '>
                       <ThemeSwitcher/>

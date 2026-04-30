@@ -6,7 +6,7 @@ export default function HomePage() {
     const message = useTranslations("HomePage");
 
     const backgroundStyle = {
-        backgroundColor: '#535252',
+        backgroundColor: '#1f2937',
         backgroundImage: "url('/assets/images/bus-2.jpg')",
         backgroundSize: 'cover',
         backgroundPosition: 'center'
@@ -20,7 +20,6 @@ export default function HomePage() {
                 <h1 className={'text-2xl md:text-6xl'}>{message("title")}</h1>
                 <p className={'text-base md:text-3xl'}>{message("description")}</p>
             </div>
-
         </section>
         <section className={"container mx-auto py-10 px-4"}>
             <TransportForm/>
