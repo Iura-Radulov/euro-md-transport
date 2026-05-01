@@ -1,7 +1,34 @@
 {
   "HomePage": {
     "title": "TRANSPORT DE PASAGERI",
-    "description": "MOLDOVA - GERMANIA - ROMÂNIA"
+    "description": "MOLDOVA - GERMANIA - ROMÂNIA",
+    "workTitle": "Cum funcționează",
+    "workDescriptionTitle1": "Completați formularul de rezervare pe site",
+    "workDescriptionTitle2": "Vă vom suna înapoi și vom discuta data plecării.",
+    "workDescriptionTitle3": "În ziua plecării, ajungeți la punctul de plecare.",
+    "workDescriptionTitle4": "Efectuați plata.",
+    "workDescriptionTitle5": "Urcați în autobuz și vă vom duce la destinație.",
+    "serviceTitle": "Serviciile noastre",
+    "serviceDescription": "Oferim servicii de transport confortabile și sigure între Moldova, Germania",
+    "serviceBlock1Title1": "Transport Moldova - Germania",
+    "serviceBlock1Description1": "Transportăm cu grijă, cu vehicule echipate cu scaune ergonomice, aer condiționat, Wi-Fi gratuit și spațiu generos pentru bagaje.",
+    "serviceBlock1Title2": "Transport de colete",
+    "serviceBlock1Description2": "Expediam colete rapid și în siguranță, garantând livrarea la timp și în condiții perfecte.",
+    "serviceBlock1Title3": "Transport Germania - Moldova",
+    "serviceBlock1Description3": "Oferim servicii regulate de transport de pasageri din Germania în Moldova.",
+    "advantagesTitle": "Avantajele serviciilor noastre de transport",
+    "advantagesBlockTitle1": "TV",
+    "advantagesBlockDescription1": "Vizionarea celor mai noi filme și seriale va face călătoria și mai plăcută.",
+    "advantagesBlockTitle2": "Prânz",
+    "advantagesBlockDescription2": "Facem opriri scurte pentru prânz la cafenele sau restaurante de pe marginea drumului.",
+    "advantagesBlockTitle3": "Wi-Fi gratuit",
+    "advantagesBlockDescription3": "Rămâneți conectat și distrați-vă în timpul călătoriei cu Wi-Fi gratuit la bord.",
+    "advantagesBlockTitle4": "Scaune confortabile",
+    "advantagesBlockDescription4": "Scaunele noastre confortabile oferă o călătorie plăcută, permițându-vă să vă relaxați și să vă bucurați de drum.",
+    "advantagesBlockTitle5": "La adresa",
+    "advantagesBlockDescription5": "Toți pasagerii îi ducem la adresele necesare.",
+    "advantagesBlockTitle6": "Doi șoferi",
+    "advantagesBlockDescription6": "Transportul este operat de doi șoferi în schimburi pentru a asigura o călătorie rapidă și sigură."
   },
 
   "nav": {
@@ -33,6 +60,16 @@
     "contactForm": "Contactați-ne acum",
     "email": "Email",
     "address": "Adresă"
+  },
+  "AboutPage": {
+    "title": "Despre noi",
+    "description": "Oferim servicii de transport confortabile și sigure între Moldova, Germania și România.",
+    "text": "Compania noastră se străduiește să ofere servicii de înaltă calitate, confort și fiabilitate pentru clienții noștri. Ne mândrim că oferim vehicule moderne echipate cu aer condiționat, Wi-Fi gratuit și compartimente spațioase pentru bagaje. Echipa noastră de șoferi profesioniști asigură o călătorie sigură și la timp pentru toți pasagerii noștri. De asemenea, oferim servicii de livrare a coletelor, garantând o livrare rapidă și fiabilă în condiții perfecte. Alegându-ne pe noi, alegeți confort, siguranță și fiabilitate în fiecare călătorie."
+  },
+  "ServicePage": {
+    "title": "Serviciile noastre",
+    "description": "Oferim servicii de transport confortabile și sigure între Moldova, Germania și România.",
+    "text": " Compania noastră se străduiește să ofere servicii de înaltă calitate, confort și fiabilitate pentru clienții noștri. Ne mândrim că oferim vehicule moderne echipate cu aer condiționat, Wi-Fi gratuit și compartimente spațioase pentru bagaje. Echipa noastră de șoferi profesioniști asigură o călătorie sigură și la timp pentru toți pasagerii noștri. De asemenea, oferim servicii de livrare a coletelor, garantând o livrare rapidă și fiabilă în condiții perfecte. Alegându-ne pe noi, alegeți confort, siguranță și fiabilitate în fiecare călătorie."
   }
 
 

@@ -12,7 +12,7 @@ export default function Page(){
     };
     return (
         <>
-            <section style={backgroundStyle} className={"transparentBackground bg-radial-[at_25%_25%] from-white to-zinc-900 to-75%  h-screen lg:h-96 flex flex-col" +
+            <section style={backgroundStyle} className={"transparentBackground bg-radial-[at_25%_25%] from-white to-zinc-900 to-75%  h-screen lg:h-[600px] flex flex-col" +
                 " items-center justify-center  text-center px-4 py-6 md:py-20 lg:py-60 "}>
                 <div className={'z-20 flex flex-col gap-5 text-white'}>
                     <h1 className={'text-3xl md:text-6xl'}>{message("title")}</h1>
