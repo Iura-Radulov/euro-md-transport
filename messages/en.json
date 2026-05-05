@@ -8,6 +8,7 @@
     "workDescriptionTitle3": "On the day of departure, you arrive at the departure point.",
     "workDescriptionTitle4": "Make the payment.",
     "workDescriptionTitle5": "Get on the bus and we will take you to your destination.",
+
     "serviceTitle": "Our Services",
     "serviceDescription": "We provide comfortable and safe transportation services between Moldova, Germany",
     "serviceBlock1Title1": "Transport Moldova - Germany",
@@ -16,19 +17,21 @@
     "serviceBlock1Description2": "We ship packages quickly and safely, guaranteeing delivery on time and in perfect conditions.",
     "serviceBlock1Title3": "Transport Germany - Moldova",
     "serviceBlock1Description3": "We offer regular passenger transportation services from Germany to Moldova.",
+
+
     "advantagesTitle": "Advantages of our transportation services",
-    "advantagesBlockTitle1": "TV",
-    "advantagesBlockDescription1": "Watching the latest movies and TV shows will make your journey even more enjoyable.",
-    "advantagesBlockTitle2": "Lunch",
-    "advantagesBlockDescription2": "We make short stops for lunch at roadside cafes or restaurants.",
-    "advantagesBlockTitle3": "Free Wi-Fi",
-    "advantagesBlockDescription3": "Stay connected and entertained on the go with our free Wi-Fi onboard.",
-    "advantagesBlockTitle4": "Comfortable seats",
-    "advantagesBlockDescription4": "Our comfortable seats provide a cozy journey, allowing you to relax and enjoy the ride.",
-    "advantagesBlockTitle5": "To the address",
-    "advantagesBlockDescription5": "We deliver all passengers to the necessary addresses.",
+    "advantagesBlockTitle1": "Delivery to the address",
+    "advantagesBlockDescription1": "We deliver each passenger directly to the specified address — without unnecessary transfers and inconveniences.",
+    "advantagesBlockTitle2": "Lunch on the way",
+    "advantagesBlockDescription2": "During the trip, there are stops where you can enjoy hot meals, as well as have coffee or tea in a cozy setting.",
+    "advantagesBlockTitle3": "Wi-Fi throughout the trip",
+    "advantagesBlockDescription3": "On the road, you have access to stable Wi-Fi, so you can stay connected, work, or relax online throughout the route.",
+    "advantagesBlockTitle4": "Comfortable transport",
+    "advantagesBlockDescription4": "Our transport meets modern standards of comfort and safety to make the trip as pleasant as possible.",
+    "advantagesBlockTitle5": "Parcel delivery",
+    "advantagesBlockDescription5": "We deliver parcels on the Moldova - Germany route quickly and carefully, with full responsibility and hand-to-hand delivery.",
     "advantagesBlockTitle6": "Two drivers",
-    "advantagesBlockDescription6": "The transport is operated by two drivers in shifts to ensure a fast and safe trip."
+    "advantagesBlockDescription6": "The trip takes place with two drivers who work in shifts — this ensures safety and allows you to get to your destination faster."
   },
 
   "nav": {
@@ -49,7 +52,9 @@
     "write_name": "Write your name",
      "email": "Email",
      "write_email": "Write your email",
-    "message": "Message"
+    "message": "Message",
+    "form_send_successfully": "Form sent successfully",
+    "form_send_error": "Error sending form. Please try again later."
 
   },
   "ContactPage": {

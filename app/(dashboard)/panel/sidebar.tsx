@@ -440,7 +440,15 @@ function LanguageDropdown() {
 
 const pages: SidebarItem[] = [
   { href: "/", icon: HiChartPie, label: "Dashboard" },
-  { href: "/panel/mailing/inbox", icon: HiInboxIn, label: "Inbox", badge: "3" },
+  // { href: "/panel/mailing/inbox", icon: HiInboxIn, label: "Inbox", badge: "3" },
+  {
+    icon: HiInboxIn,
+    label: "Inbox",
+    items: [
+      { href: "/panel/mailing/transport-forms", label: "Transport Forms", badge: "3" },
+      // { href: "/panel/locations/europa", label: "Europa" },
+    ],
+  },
   {
     icon: HiLocationMarker,
     label: "Locations",

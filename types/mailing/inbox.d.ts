@@ -1,8 +1,10 @@
+import datetime from "zod/src/v3/benchmarks/datetime";
+
 export interface MailingInboxMessage {
-  avatar: string;
-  sender: string;
-  subject: string;
-  time: string;
-  read: boolean;
-  starred: boolean;
+  fromDestination: string;
+  toDestination: string;
+  phone: string;
+  createdAt: string;
+  status: string;
+
 }

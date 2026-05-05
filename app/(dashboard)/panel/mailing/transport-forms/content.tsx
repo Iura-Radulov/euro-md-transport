@@ -35,7 +35,7 @@ function MailingInboxPageContent({ inboxMessages }: MailingInboxPageData) {
     <>
       <Menu inboxMessages={inboxMessages} />
       <Inbox inboxMessages={inboxMessages} />
-      <Footer />
+
     </>
   );
 }
@@ -235,58 +235,5 @@ function Inbox({ inboxMessages }: MailingInboxPageData) {
   );
 }
 
-function Footer() {
-  return (
-    <div className="w-full items-center space-y-4 border-t border-gray-200  p-4 sm:sticky sm:flex sm:justify-between sm:space-y-0 dark:border-gray-700 dark:bg-gray-800">
-      <div className="flex flex-col gap-1">
-        <div className="text-xs font-medium text-gray-500 dark:text-gray-400">
-          3.24 GB of 15 GB used
-        </div>
-        <Progress
-          color="blue"
-          progress={22}
-          className="w-full sm:w-52 md:w-96"
-        />
-      </div>
-      <div className="hidden items-center gap-x-2 text-sm font-medium text-gray-500 sm:flex dark:text-gray-400">
-        Last account activity: 2 hours ago
-        <HiEye className="h-4 w-4" />
-      </div>
-      <div className="mb-4 flex items-center sm:mb-0 sm:hidden">
-        <Link
-          href="#"
-          className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900"
-        >
-          <span className="sr-only">Apps</span>
-          <HiViewGrid className="text-2xl" />
-        </Link>
-        <Link
-          href="#"
-          className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900"
-        >
-          <span className="sr-only">Previous</span>
-          <HiChevronLeft className="text-2xl" />
-        </Link>
-        <Link
-          href="#"
-          className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900"
-        >
-          <span className="sr-only">Next</span>
-          <HiChevronRight className="text-2xl" />
-        </Link>
-        <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-          Showing&nbsp;
-          <span className="font-semibold text-gray-900 dark:text-white">
-            1-25
-          </span>
-          &nbsp;of&nbsp;
-          <span className="font-semibold text-gray-900 dark:text-white">
-            2290
-          </span>
-        </span>
-      </div>
-    </div>
-  );
-}
 
 export default MailingInboxPageContent;

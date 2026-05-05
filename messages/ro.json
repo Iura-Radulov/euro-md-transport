@@ -8,6 +8,7 @@
     "workDescriptionTitle3": "În ziua plecării, ajungeți la punctul de plecare.",
     "workDescriptionTitle4": "Efectuați plata.",
     "workDescriptionTitle5": "Urcați în autobuz și vă vom duce la destinație.",
+
     "serviceTitle": "Serviciile noastre",
     "serviceDescription": "Oferim servicii de transport confortabile și sigure între Moldova, Germania",
     "serviceBlock1Title1": "Transport Moldova - Germania",
@@ -16,19 +17,21 @@
     "serviceBlock1Description2": "Expediam colete rapid și în siguranță, garantând livrarea la timp și în condiții perfecte.",
     "serviceBlock1Title3": "Transport Germania - Moldova",
     "serviceBlock1Description3": "Oferim servicii regulate de transport de pasageri din Germania în Moldova.",
+
+
     "advantagesTitle": "Avantajele serviciilor noastre de transport",
-    "advantagesBlockTitle1": "TV",
-    "advantagesBlockDescription1": "Vizionarea celor mai noi filme și seriale va face călătoria și mai plăcută.",
-    "advantagesBlockTitle2": "Prânz",
-    "advantagesBlockDescription2": "Facem opriri scurte pentru prânz la cafenele sau restaurante de pe marginea drumului.",
-    "advantagesBlockTitle3": "Wi-Fi gratuit",
-    "advantagesBlockDescription3": "Rămâneți conectat și distrați-vă în timpul călătoriei cu Wi-Fi gratuit la bord.",
-    "advantagesBlockTitle4": "Scaune confortabile",
-    "advantagesBlockDescription4": "Scaunele noastre confortabile oferă o călătorie plăcută, permițându-vă să vă relaxați și să vă bucurați de drum.",
-    "advantagesBlockTitle5": "La adresa",
-    "advantagesBlockDescription5": "Toți pasagerii îi ducem la adresele necesare.",
+    "advantagesBlockTitle1": "Livrare la adresă",
+    "advantagesBlockDescription1": "Livrăm fiecare pasager direct la adresa specificată — fără transferuri inutile și inconveniente.",
+    "advantagesBlockTitle2": "Prânz în drum",
+    "advantagesBlockDescription2": "În timpul călătoriei, sunt prevăzute opriri unde vă puteți bucura de mâncăruri calde, precum și de cafea sau ceai într-un cadru confortabil.",
+    "advantagesBlockTitle3": "Wi-Fi pe tot parcursul călătoriei",
+    "advantagesBlockDescription3": "Pe drum, aveți acces la Wi-Fi stabil, astfel încât să puteți rămâne conectați, să lucrați sau să vă relaxați online pe tot parcursul traseului.",
+    "advantagesBlockTitle4": "Transport confortabil",
+    "advantagesBlockDescription4": "Transportul nostru respectă standardele moderne de confort și siguranță pentru a face călătoria cât mai plăcută.",
+    "advantagesBlockTitle5": "Livrare de colete",
+    "advantagesBlockDescription5": "Livrăm colete pe ruta Moldova - Germania rapid și cu grijă, cu responsabilitate totală și livrare din mână în mână.",
     "advantagesBlockTitle6": "Doi șoferi",
-    "advantagesBlockDescription6": "Transportul este operat de doi șoferi în schimburi pentru a asigura o călătorie rapidă și sigură."
+    "advantagesBlockDescription6": "Călătoria se desfășoară cu doi șoferi care lucrează în schimburi — acest lucru asigură siguranța și vă permite să ajungeți mai repede la destinație."
   },
 
   "nav": {
@@ -50,7 +53,9 @@
     "write_name": "Introduceți numele",
     "email": "Email",
     "write_email": "Introduceți emailul",
-    "message": "Mesaj"
+    "message": "Mesaj",
+    "form_send_successfully": "Formular trimis cu succes",
+    "form_send_error": "Eroare la trimiterea formularului. Vă rugăm să încercați din nou mai târziu."
   },
   "ContactPage": {
     "title": "Contacte",

@@ -21,14 +21,14 @@ export default function ServiceSection({dict}){
 
 
     return (
-        <section style={backgroundStyle}
-                 className={"transparentBackground bg-radial-[at_25%_25%] from-white to-zinc-900 to-75%  flex flex-col" +
-                     " items-center justify-center  text-center px-4 py-10 md:py-20 lg:py-50 "}>
-            <div className={'z-20 flex flex-col gap-5 text-white'}>
+
+            <>
+
+            <div className={'z-20 flex flex-col gap-5 '}>
                 <h1 className={'text-2xl md:text-6xl'}>{message("serviceTitle")}</h1>
                 <p className={'text-base md:text-3xl'}>{message("serviceDescription")}</p>
             </div>
-            <div className={'container grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 z-20 text-white'}>
+            <div className={'container grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 z-20 '}>
                 <div className={'p-10'}>
                     <Image className={'rounded-lg w-full'} src={blog1Image} alt={'blog 1'}/>
                     <div >
@@ -53,6 +53,7 @@ export default function ServiceSection({dict}){
                     </div>
                 </div>
             </div>
-        </section>
+            </>
+
     )
 }

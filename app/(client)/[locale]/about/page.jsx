@@ -1,4 +1,6 @@
 import {useTranslations} from "next-intl";
+import WorkSection from "../components/WorkSection";
+import TransportForm from "../components/TransportForm";
 
 export default function Page(){
     const message = useTranslations("AboutPage");
@@ -20,8 +22,16 @@ export default function Page(){
                 </div>
             </section>
             <section className={"container mx-auto py-10 lg:py-16 px-4"}>
-                <h3  className={'text-lg lg:text-2xl'}>{message("text")}</h3>
+                <h3 className={'text-lg lg:text-2xl text-gray-700 dark:text-gray-100'}>{message("text")}</h3>
             </section>
+
+            <section className={"container mx-auto py-10 lg:py-16 px-4"}>
+                <WorkSection/>
+            </section>
+            <section className={"container mx-auto py-10 lg:py-16 px-4"}>
+                <TransportForm/>
+            </section>
+
         </>
     )
 }

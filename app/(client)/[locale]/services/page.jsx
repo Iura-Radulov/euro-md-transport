@@ -1,4 +1,6 @@
 import {useTranslations} from "next-intl";
+import ServiceSection from "../components/ServiceSection";
+import TransportForm from "../components/TransportForm";
 
 export default function Page(){
 
@@ -21,9 +23,20 @@ export default function Page(){
                 </div>
             </section>
             <section className={"container mx-auto py-10 lg:py-16 px-4"}>
-                <h3 className={'text-lg lg:text-2xl'}>{message("text")}</h3>
+                <h3 className={'text-lg lg:text-2xl text-gray-700 dark:text-gray-100'}>{message("text")}</h3>
             </section>
+
+            <section className={"t flex flex-col" +
+                " items-center justify-center  text-center px-4 py-10 md:py-20 lg:py-30 text-gray-700 dark:text-gray-100"}>
+                <ServiceSection/>
+            </section>
+
+            <section className={"container mx-auto py-10 lg:py-16 px-4"}>
+                <TransportForm/>
+            </section>
+
+
         </>
     )
 
-    }
+}

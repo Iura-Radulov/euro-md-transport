@@ -19,8 +19,38 @@ import {
   HiTrash,
 } from "react-icons/hi";
 import { HiFaceSmile } from "react-icons/hi2";
+import {useEffect, useState} from "react";
 
 function MailingReadPage() {
+
+  const [items, setItems] = useState([])
+  const[isLoading, setIsLoading] = useState(true)
+
+  useEffect(()=>{
+    const fetchData =async ()=>{
+      try {
+
+        const res = await fetch(`/api/locations-europa`);
+        if (!res.ok) {
+          throw new Error(`API error: ${res.status} ${res.statusText}`);
+        }
+        const data = await res.json();
+        console.log(data)
+        setItems(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error('Failed to fetch items:', error);
+        setItems([]); // fallback to empty list
+      }
+      finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+
+  }, [])
+
+
   return (
     <>
       <Menu />
@@ -68,7 +98,7 @@ function MailingReadPage() {
           </p>
         </div>
       </div>
-      <Footer />
+      {/*<Footer />*/}
     </>
   );
 }
@@ -79,7 +109,7 @@ function Menu() {
       <div className="flex items-center divide-x divide-gray-100 dark:divide-gray-700">
         <div className="pr-3">
           <Link
-            href="/panel/mailing/inbox"
+            href="/panel/mailing/transport-forms"
             className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             <span className="sr-only">Go back</span>
@@ -122,13 +152,6 @@ function Menu() {
       </div>
       <div className="hidden space-x-2 divide-x divide-gray-100 pl-0 sm:flex sm:px-2 dark:divide-gray-700">
         <div className="flex gap-1 pr-2">
-          <Link
-            href="#"
-            className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >
-            <span className="sr-only">Reply</span>
-            <HiReply className="h-6 w-6" />
-          </Link>
           <Link
             href="#"
             className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"

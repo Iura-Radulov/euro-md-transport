@@ -4,6 +4,9 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import {useLocale, useTranslations} from "next-intl";
 import getName from "@/utils/getNameByLanguage";
+import ToastError from "./toasts/Toast-error";
+import ToastSuccess from "./toasts/Toast-success";
+
 
 
 export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setNameRu, setNameRo}){
@@ -15,7 +18,8 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
     const [phone, setPhone] = useState('');
     const [locationsMoldova, setLocationsMoldova] = useState([]);
     const [locationsEuropa, setLocationsEuropa] = useState([]);
-
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     useEffect(()=>{
 
@@ -26,7 +30,6 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
                     throw new Error(`API error: ${res.status} ${res.statusText}`);
                 }
                 const data = await res.json();
-                console.log(data)
                 setLocationsMoldova(Array.isArray(data) ? data : []);
             } catch (error) {
                 console.error('Failed to fetch items:', error);
@@ -40,7 +43,6 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
                     throw new Error(`API error: ${res.status} ${res.statusText}`);
                 }
                 const data = await res.json();
-                console.log(data)
                 setLocationsEuropa(Array.isArray(data) ? data : []);
             } catch (error) {
                 console.error('Failed to fetch items:', error);
@@ -54,12 +56,40 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
 
 
     }, [])
-    function handleSubmit(event){
+    async function handleSubmit(event){
         event.preventDefault()
         console.log("submit")
         console.log('from: ', fromDestination)
         console.log('to: ', toDestination)
         console.log('phone: ', phone)
+        try {
+            const response = await fetch(`/api/transport-form/new`, {
+                method: "POST",
+                body: JSON.stringify({
+                    fromDestination,
+                    toDestination,
+                    phone,
+                }),
+            });
+
+            if (response.ok) {
+                console.log("Form send successfully")
+                setSuccess(message("form_send_successfully"))
+                setError("")
+                setFromDestination('')
+                setToDestination('')
+                setPhone('')
+
+            } else{
+                setError(message("form_send_error"))
+                setSuccess("")
+            }
+        } catch (error) {
+            console.log(error);
+                setError(message("form_send_error"))
+        }
+
+
     }
     return (
         <div className='p-5 lg:w-5/6 mx-auto'>
@@ -72,12 +102,13 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
 
                         <Select
                             id="fromDestination"
+                            value={fromDestination}
                             onChange={(event) => setFromDestination(event.target.value)}
                             required
                         >
                             <option value="">{message("select_from")}</option>
                             {locationsMoldova.map((location) => (
-                                <option key={location._id} value={location._id}>{getName(locale, location.nameRu, location.nameEn, location.nameRo ) }</option>
+                                <option key={location._id} value={location.nameRu}>{getName(locale, location.nameRu, location.nameEn, location.nameRo ) }</option>
                             ))}
 
                         </Select>
@@ -90,12 +121,13 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
 
                         <Select
                             id="toDestination"
+                            value={toDestination}
                             onChange={(event) => setToDestination(event.target.value)}
                             required
                         >
                             <option value="">{message("select_to")}</option>
                             {locationsEuropa.map((location) => (
-                                <option key={location._id} value={location._id}>{getName(locale, location.nameRu, location.nameEn, location.nameRo )}</option>
+                                <option key={location._id} value={location.nameRu}>{getName(locale, location.nameRu, location.nameEn, location.nameRo )}</option>
                             ))}
 
 
@@ -120,7 +152,8 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
                             {message("submit")}
                         </Button>
                     </div>
-
+                    {error && <ToastError message={error}/>}
+                    {success && <ToastSuccess message={success}/>}
 
 
                 </div>

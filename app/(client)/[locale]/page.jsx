@@ -16,6 +16,13 @@ export default function HomePage() {
         backgroundPosition: 'center'
     };
 
+    const backgroundServicesStyle = {
+        backgroundColor: '#161b22',
+        backgroundImage: "url('/assets/images/bus-3.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+    };
+
     return (
         <>
             <section style={backgroundStyle}
@@ -32,7 +39,11 @@ export default function HomePage() {
             <section className={"container mx-auto py-10 lg:py-16 px-4"}>
                 <WorkSection/>
             </section>
-            <ServiceSection/>
+            <section style={backgroundServicesStyle}
+                     className={"transparentBackground bg-radial-[at_25%_25%] from-white to-zinc-900 to-75%  flex flex-col" +
+                         " items-center justify-center  text-center px-4 py-10 md:py-20 lg:py-50 text-white"}>
+                <ServiceSection/>
+            </section>
             <AdvantagesSection/>
         </>
     );
