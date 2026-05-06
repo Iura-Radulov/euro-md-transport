@@ -444,9 +444,11 @@ const pages: SidebarItem[] = [
   {
     icon: HiInboxIn,
     label: "Inbox",
+    badge: "3",
     items: [
-      { href: "/panel/mailing/transport-forms", label: "Transport Forms", badge: "3" },
-      // { href: "/panel/locations/europa", label: "Europa" },
+      { href: "/panel/mailing/transport-forms", label: "Transport Forms" },
+      { href: "/panel/mailing/contact-forms", label: "Contact Forms" },
+
     ],
   },
   {

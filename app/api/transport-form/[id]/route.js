@@ -17,7 +17,7 @@ export const GET = async(request, {params}) =>{
 }
 
 export const PATCH = async(request, {params})=>{
-    const { fromDestination, toDestination, phone } = await request.json()
+    const { fromDestination, toDestination, phone, status } = await request.json()
 
     try{
         await connectToDB()
@@ -34,7 +34,9 @@ export const PATCH = async(request, {params})=>{
         if(phone) {
             existingTransportForm.phone = phone
         }
-
+        if(status) {
+            existingTransportForm.status = status
+        }
 
 
         await existingTransportForm.save()

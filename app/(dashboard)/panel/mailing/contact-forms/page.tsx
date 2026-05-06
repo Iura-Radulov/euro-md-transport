@@ -41,7 +41,7 @@ export default function Page() {
     const fetchData =async ()=>{
       try {
 
-        const res = await fetch(`/api/transport-form`);
+        const res = await fetch(`/api/contact-form`);
         if (!res.ok) {
           throw new Error(`API error: ${res.status} ${res.statusText}`);
         }
@@ -144,7 +144,7 @@ export default function Page() {
 
    async function onRowClick(id) {
 
-      router.push(`/panel/mailing/transport-forms/${id}`);
+      router.push(`/panel/mailing/contact-forms/${id}`);
     }
 
     function onRowSelect(e: React.MouseEvent) {
@@ -174,18 +174,18 @@ export default function Page() {
                       </TableHeadCell>
                       <TableHeadCell>
                         <div className="flex items-center">
-                          <span className="me-2">Откуда отправляться</span>
-                        </div>
-                      </TableHeadCell>
-                      <TableHeadCell>
-                        <div className="flex items-center">
-                          <span className="me-2">Куда отправиться</span>
-
+                          <span className="me-2">Имя</span>
                         </div>
                       </TableHeadCell>
                       <TableHeadCell>
                         <div className="flex items-center">
                           <span className="me-2">Телефон</span>
+
+                        </div>
+                      </TableHeadCell>
+                      <TableHeadCell>
+                        <div className="flex items-center">
+                          <span className="me-2">Сообщение</span>
 
                         </div>
                       </TableHeadCell>
@@ -203,7 +203,7 @@ export default function Page() {
                       className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800"
                   >
                     {inboxMessages.map(
-                        ({ _id, fromDestination, toDestination, phone, createdAt, status = 'new' }) => (
+                        ({ _id, name, message, phone, createdAt, status = 'new' }) => (
                             <TableRow
                                 key={`${_id}`}
                                 className="cursor-pointer  hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600"
@@ -223,7 +223,7 @@ export default function Page() {
                                         "font-semibold text-gray-900 dark:text-white",
                                     )}
                                 >
-                              {fromDestination}
+                              {name}
                                </span>
                               </TableCell>
                               <TableCell
@@ -232,17 +232,17 @@ export default function Page() {
                                       status === 'new' && "font-medium text-gray-900 dark:text-white",
                                   )}
                               >
-                                {toDestination}
+                                {phone}
                               </TableCell>
                               <TableCell className="relative flex items-center space-x-4 p-4 whitespace-nowrap">
                                 <span
                                     className={twMerge(
-                                        "text-base text-gray-700 after:absolute after:inset-0 dark:text-gray-400",
+                                        "max-w-sm truncate overflow-hidden text-base text-gray-700 xl:max-w-(--breakpoint-md) dark:text-gray-400",
                                         status === 'new' &&
                                         "font-semibold text-gray-900 dark:text-white",
                                     )}
                                 >
-                              {phone}
+                              {message}
                                </span>
                               </TableCell>
                               <TableCell

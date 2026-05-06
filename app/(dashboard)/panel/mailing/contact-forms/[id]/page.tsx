@@ -47,14 +47,14 @@ export default function Page({params}) {
     const fetchData =async ()=>{
       try {
 
-        const res = await fetch(`/api/transport-form/${id}`);
+        const res = await fetch(`/api/contact-form/${id}`);
         if (!res.ok) {
           throw new Error(`API error: ${res.status} ${res.statusText}`);
         }
         const data = await res.json();
         console.log(data)
         if(data.status === 'new') {
-          const response = await fetch(`/api/transport-form/${id}`, {
+          const response = await fetch(`/api/contact-form/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
               status: 'view',
@@ -77,10 +77,10 @@ export default function Page({params}) {
 
   async function handleDelete(itemId) {
     try {
-      await fetch(`/api/transport-form/${itemId.toString()}`, {
+      await fetch(`/api/contact-form/${itemId.toString()}`, {
         method: "DELETE",
       });
-      router.push("/panel/mailing/transport-forms");
+      router.push("/panel/mailing/contact-forms");
      // route()
 
     } catch (error) {
@@ -102,7 +102,7 @@ export default function Page({params}) {
                 <div className="flex items-center divide-x divide-gray-100 dark:divide-gray-700">
                   <div className="pr-3">
                     <Link
-                        href="/panel/mailing/transport-forms"
+                        href="/panel/mailing/contact-forms"
                         className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                       <span className="sr-only">Go back</span>
@@ -174,18 +174,9 @@ export default function Page({params}) {
                     <ListItem className="p-4 sm:p-8">
                       <div className="flex items-center space-x-4 rtl:space-x-reverse">
                         <div className="min-w-0 flex-1">
-                          <p className="truncate text-sm text-gray-500 dark:text-gray-400">Откуда отправляться:</p>
+                          <p className="truncate text-sm text-gray-500 dark:text-gray-400">Имя</p>
                         </div>
-                        <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">{data.fromDestination}</div>
-                      </div>
-                    </ListItem>
-
-                    <ListItem className="p-4 sm:p-8">
-                      <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                        <div className="min-w-0 flex-1">
-                          <p className="truncate text-sm text-gray-500 dark:text-gray-400">Куда отправиться:</p>
-                        </div>
-                        <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">{data.toDestination}</div>
+                        <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">{data.name}</div>
                       </div>
                     </ListItem>
 
@@ -196,6 +187,18 @@ export default function Page({params}) {
                         </div>
                         <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                           <a href={`tel:${data.phone.replace(/[^\d+]/g, '')}`}>{data.phone}</a>
+                        </div>
+                      </div>
+                    </ListItem>
+
+                    <ListItem className="p-4 sm:p-8">
+                      <div className="mb-4">
+                        <p className="truncate text-sm text-gray-500 dark:text-gray-400">Сообщение:</p>
+                      </div>
+                      <div className="flex items-center ">
+
+                        <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                          {data.message}
                         </div>
                       </div>
                     </ListItem>

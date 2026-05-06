@@ -4,24 +4,57 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import {useLocale, useTranslations} from "next-intl";
 import getName from "@/utils/getNameByLanguage";
+import ToastError from "./toasts/Toast-error";
+import ToastSuccess from "./toasts/Toast-success";
 
 
 export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setNameRu, setNameRo}){
     const message = useTranslations("form");
     const locale = useLocale();
-    const [name, setName] = useState([]);
+    const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
+    // const [email, setEmail] = useState('');
     const [text, setText] = useState('');
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
 
 
 
 
-
-    function handleSubmit(event){
+  async  function handleSubmit(event){
         event.preventDefault()
         console.log("submit")
+
+        console.log('name: ', name)
+        console.log('to: ', phone)
+
+        try {
+            const response = await fetch(`/api/contact-form/new`, {
+                method: "POST",
+                body: JSON.stringify({
+                    name,
+                    message: text,
+                    phone,
+                }),
+            });
+
+            if (response.ok) {
+                console.log("Form send successfully")
+                setSuccess(message("form_send_successfully"))
+                setError("")
+                setName('')
+                setPhone('')
+                setText('')
+
+            } else{
+                setError(message("form_send_error"))
+                setSuccess("")
+            }
+        } catch (error) {
+            console.log(error);
+            setError(message("form_send_error"))
+        }
 
     }
     return (
@@ -65,7 +98,6 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
                         id="text"
                         value={text}
                         rows={5}
-
                         onChange={(event) => setText(event.target.value)}
                         required
                     />
@@ -77,7 +109,8 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
                     </Button>
                 </div>
 
-
+                {error && <ToastError message={error}/>}
+                {success && <ToastSuccess message={success}/>}
             </form>
 
         </div>

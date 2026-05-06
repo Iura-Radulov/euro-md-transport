@@ -1,5 +1,5 @@
 import { connectToDB } from "@/utils/database";
-import TransportForm from "@/models/transport_form";
+import ContactForm from "@/models/contact_form";
 
 export const dynamic = 'force-dynamic';
 
@@ -7,7 +7,7 @@ export const GET = async (request, { params }) => {
     try {
         await connectToDB()
 
-        const items = await TransportForm.find({ }).sort({ createdAt: -1 })
+        const items = await ContactForm.find({ })
 
         return new Response(JSON.stringify(items), { status: 200 })
     } catch (error) {
