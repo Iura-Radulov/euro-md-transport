@@ -5,26 +5,21 @@ import Link from "next/link";
 import {
   HiArchive,
   HiArrowNarrowLeft,
-  HiArrowRight,
   HiChevronLeft,
   HiChevronRight,
   HiClock,
   HiExclamationCircle,
-  HiOutlinePhotograph,
-  HiOutlineTag,
-  HiPaperClip,
-  HiPrinter,
-  HiReply,
   HiTrash,
 } from "react-icons/hi";
-import { HiFaceSmile } from "react-icons/hi2";
+
+import {PageProps} from "@/types/props";
 import {useEffect, useState} from "react";
 import { use } from 'react';
 import Loading from "@/app/(dashboard)/loading";
 import {useRouter} from "next/navigation";
 import ConfirmModal from "@/app/(dashboard)/panel/components/ConfirmModal";
 
-export default function Page({params}) {
+export default function Page({params}: PageProps) {
   const resolvedParams = use(params);
   const id = resolvedParams.id;
   const [data, setData] = useState(null)
