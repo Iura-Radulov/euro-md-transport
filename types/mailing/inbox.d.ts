@@ -8,3 +8,13 @@ export interface MailingInboxMessage {
   status: string;
 
 }
+
+export interface ContactFormData {
+  _id: string;
+  id?: string;
+  status: string;
+  createdAt: string;
+  phone?: string;
+  email:string;
+  name:string;
+}

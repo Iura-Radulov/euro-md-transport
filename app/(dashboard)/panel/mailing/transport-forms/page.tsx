@@ -6,11 +6,8 @@ import {useEffect, useState} from "react";
 import {Checkbox, Label, Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow} from "flowbite-react";
 import Link from "next/link";
 import {
-  HiArchive,
   HiChevronLeft, HiChevronRight,
-  HiDotsVertical,
   HiExclamationCircle,
-  HiOutlineViewGrid,
   HiTrash
 } from "react-icons/hi";
 import {useRouter} from "next/navigation";
@@ -25,10 +22,10 @@ export interface MailingInboxPageData {
 
 
 export default function Page() {
-  const [items, setItems] = useState([])
-  const[isLoading, setIsLoading] = useState(true)
+  const [items, setItems] = useState<MailingInboxMessage[]>([])
+  const[isLoading, setIsLoading] = useState<boolean>(true)
 
-  const options = {
+  const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -37,17 +34,16 @@ export default function Page() {
     hour12: false,
   };
 
-  useEffect(()=>{
-    const fetchData =async ()=>{
+  useEffect(():void=>{
+    const fetchData =async ():Promise<void>=>{
       try {
-
         const res = await fetch(`/api/transport-form`);
         if (!res.ok) {
           throw new Error(`API error: ${res.status} ${res.statusText}`);
         }
-        const data = await res.json();
-        console.log(data)
-        setItems(Array.isArray(data) ? data : []);
+        const response = await res.json();
+        console.log(response)
+        setItems(Array.isArray(response) ? response : []);
       } catch (error) {
         console.error('Failed to fetch items:', error);
         setItems([]); // fallback to empty list
@@ -61,17 +57,18 @@ export default function Page() {
 
   }, [])
 
+  if (isLoading) return <div className={'w-full'}><Loading/></div>;
 
   function Menu({ inboxMessages }: MailingInboxPageData) {
     const [page, setPage] = useState(0);
     const numEntriesPerPage = Math.min(20, inboxMessages.length);
     const numPages = Math.floor(inboxMessages.length / numEntriesPerPage);
 
-    const previousPage = () => {
+    const previousPage = ():void => {
       setPage(page > 0 ? page - 1 : page);
     };
 
-    const nextPage = () => {
+    const nextPage = ():void => {
       setPage(page < numPages - 1 ? page + 1 : page);
     };
 
@@ -268,10 +265,7 @@ export default function Page() {
   return (
       <>
         <Menu inboxMessages={items} />
-        {isLoading ?
-            <div className={'w-full'}> <Loading /> </div>
-            : <Inbox inboxMessages={items} />}
-
+        <Inbox inboxMessages={items} />
       </>
   );
 }

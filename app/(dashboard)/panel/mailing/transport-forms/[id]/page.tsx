@@ -13,6 +13,7 @@ import {
 } from "react-icons/hi";
 
 import {PageProps} from "@/types/props";
+import {MailingInboxMessage} from "@/types/mailing/inbox"
 import {useEffect, useState} from "react";
 import { use } from 'react';
 import Loading from "@/app/(dashboard)/loading";
@@ -22,11 +23,11 @@ import ConfirmModal from "@/app/(dashboard)/panel/components/ConfirmModal";
 export default function Page({params}: PageProps) {
   const resolvedParams = use(params);
   const id = resolvedParams.id;
-  const [data, setData] = useState(null)
-  const[isLoading, setIsLoading] = useState(true)
-  const [isOpen, setOpen] = useState(false);
+  const [data, setData] = useState<MailingInboxMessage | null>(null)
+  const[isLoading, setIsLoading] = useState<boolean>(true)
+  const [isOpen, setOpen] = useState<boolean>(false);
 
-  const options = {
+  const options:Intl.DateTimeFormatOptions  = {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -38,17 +39,17 @@ export default function Page({params}: PageProps) {
   const router = useRouter()
 
 
-  useEffect(()=>{
-    const fetchData =async ()=>{
+  useEffect(():void=>{
+    const fetchData =async ():Promise<void>=>{
       try {
 
         const res = await fetch(`/api/transport-form/${id}`);
         if (!res.ok) {
           throw new Error(`API error: ${res.status} ${res.statusText}`);
         }
-        const data = await res.json();
-        console.log(data)
-        if(data.status === 'new') {
+        const result:MailingInboxMessage = await res.json();
+        console.log(result)
+        if(result.status === 'new') {
           const response = await fetch(`/api/transport-form/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
@@ -56,7 +57,7 @@ export default function Page({params}: PageProps) {
             }),
           });
         }
-        setData( data );
+        setData( result );
       } catch (error) {
         console.error('Failed to fetch items:', error);
         setData(null); // fallback to empty list
@@ -70,7 +71,7 @@ export default function Page({params}: PageProps) {
 
   }, [])
 
-  async function handleDelete(itemId) {
+  async function handleDelete(itemId):Promise<void> {
     try {
       await fetch(`/api/transport-form/${itemId.toString()}`, {
         method: "DELETE",

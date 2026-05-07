@@ -1,34 +1,33 @@
 'use client'
 
 
-import type { MailingInboxMessage } from "@/types/mailing/inbox";
+import type { ContactFormData } from "@/types/mailing/inbox";
 import {useEffect, useState} from "react";
 import {Checkbox, Label, Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow} from "flowbite-react";
 import Link from "next/link";
 import {
-  HiArchive,
   HiChevronLeft, HiChevronRight,
-  HiDotsVertical,
   HiExclamationCircle,
-  HiOutlineViewGrid,
   HiTrash
 } from "react-icons/hi";
 import {useRouter} from "next/navigation";
 import {twMerge} from "tailwind-merge";
 import Loading from "@/app/(dashboard)/loading";
 
+
 export interface MailingInboxPageData {
-  inboxMessages: MailingInboxMessage[];
+  inboxMessages: ContactFormData[];
 }
 
 
 
 
 export default function Page() {
-  const [items, setItems] = useState([])
-  const[isLoading, setIsLoading] = useState(true)
+  const [items, setItems] = useState<ContactFormData[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const options = {
+
+  const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -38,9 +37,8 @@ export default function Page() {
   };
 
   useEffect(()=>{
-    const fetchData =async ()=>{
+    const fetchData =async ():Promise<void>=>{
       try {
-
         const res = await fetch(`/api/contact-form`);
         if (!res.ok) {
           throw new Error(`API error: ${res.status} ${res.statusText}`);
@@ -61,17 +59,19 @@ export default function Page() {
 
   }, [])
 
+  if (isLoading) return <div className={'w-full'}><Loading/></div>;
 
-  function Menu({ inboxMessages }: MailingInboxPageData) {
-    const [page, setPage] = useState(0);
-    const numEntriesPerPage = Math.min(20, inboxMessages.length);
-    const numPages = Math.floor(inboxMessages.length / numEntriesPerPage);
 
-    const previousPage = () => {
+  function Menu({inboxMessages}: MailingInboxPageData) {
+    const [page, setPage] = useState<number>(0);
+    const numEntriesPerPage:number = Math.min(20, inboxMessages.length);
+    const numPages:number = Math.floor(inboxMessages.length / numEntriesPerPage);
+
+    const previousPage = ():void => {
       setPage(page > 0 ? page - 1 : page);
     };
 
-    const nextPage = () => {
+    const nextPage = ():void => {
       setPage(page < numPages - 1 ? page + 1 : page);
     };
 
@@ -142,12 +142,12 @@ export default function Page() {
   function Inbox({ inboxMessages }: MailingInboxPageData) {
     const router = useRouter();
 
-   async function onRowClick(id) {
+   async function onRowClick(id):Promise<void> {
 
       router.push(`/panel/mailing/contact-forms/${id}`);
     }
 
-    function onRowSelect(e: React.MouseEvent) {
+    function onRowSelect(e: React.MouseEvent):void {
       e.stopPropagation();
     }
 
@@ -268,9 +268,8 @@ export default function Page() {
   return (
       <>
         <Menu inboxMessages={items} />
-        {isLoading ?
-            <div className={'w-full'}> <Loading /> </div>
-            : <Inbox inboxMessages={items} />}
+
+        <Inbox inboxMessages={items} />
 
       </>
   );
