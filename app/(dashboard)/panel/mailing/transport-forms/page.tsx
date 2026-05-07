@@ -39,7 +39,7 @@ export default function Page() {
       try {
         const res = await fetch(`/api/transport-form`);
         if (!res.ok) {
-          throw new Error(`API error: ${res.status} ${res.statusText}`);
+          console.log(`API error: ${res.status} ${res.statusText}`);
         }
         const response = await res.json();
         console.log(response)
@@ -139,12 +139,12 @@ export default function Page() {
   function Inbox({ inboxMessages }: MailingInboxPageData) {
     const router = useRouter();
 
-   async function onRowClick(id) {
+   async function onRowClick(id:string):Promise<void> {
 
       router.push(`/panel/mailing/transport-forms/${id}`);
     }
 
-    function onRowSelect(e: React.MouseEvent) {
+    function onRowSelect(e: React.MouseEvent):void {
       e.stopPropagation();
     }
 

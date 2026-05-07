@@ -41,7 +41,7 @@ export default function Page() {
       try {
         const res = await fetch(`/api/contact-form`);
         if (!res.ok) {
-          throw new Error(`API error: ${res.status} ${res.statusText}`);
+          console.log(`API error: ${res.status} ${res.statusText}`);
         }
         const data = await res.json();
         console.log(data)
@@ -142,7 +142,7 @@ export default function Page() {
   function Inbox({ inboxMessages }: MailingInboxPageData) {
     const router = useRouter();
 
-   async function onRowClick(id):Promise<void> {
+   async function onRowClick(id:string):Promise<void> {
 
       router.push(`/panel/mailing/contact-forms/${id}`);
     }
