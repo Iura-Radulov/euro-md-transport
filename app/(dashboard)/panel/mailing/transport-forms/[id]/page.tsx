@@ -23,7 +23,14 @@ import ConfirmModal from "@/app/(dashboard)/panel/components/ConfirmModal";
 export default function Page({params}: PageProps) {
   const resolvedParams = use(params);
   const id = resolvedParams.id;
-  const [data, setData] = useState<MailingInboxMessage | null>(null)
+  const [data, setData] = useState<MailingInboxMessage >({
+    _id:"",
+    createdAt: "",
+    fromDestination: "",
+    phone: "",
+    status: "",
+    toDestination: ""
+   })
   const[isLoading, setIsLoading] = useState<boolean>(true)
   const [isOpen, setOpen] = useState<boolean>(false);
 

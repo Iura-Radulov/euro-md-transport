@@ -23,7 +23,14 @@ import ConfirmModal from "@/app/(dashboard)/panel/components/ConfirmModal";
 export default function Page({params}: PageProps) {
   const resolvedParams = use(params);
   const id = resolvedParams.id;
-  const [data, setData] = useState<ContactFormData | null>(null)
+  const [data, setData] = useState<ContactFormData >({
+    _id: "",
+    createdAt: "",
+    email: "",
+    id: "",
+    phone: "",
+    status: "",
+    name:''})
   const[isLoading, setIsLoading] = useState<boolean>(true)
   const [isOpen, setOpen] = useState<boolean>(false);
 
