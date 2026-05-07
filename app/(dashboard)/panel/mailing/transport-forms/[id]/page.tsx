@@ -79,7 +79,7 @@ export default function Page({params}: PageProps) {
 
   }, [])
 
-  async function handleDelete(itemId):Promise<void> {
+  async function handleDelete(itemId:string):Promise<void> {
     try {
       await fetch(`/api/transport-form/${itemId.toString()}`, {
         method: "DELETE",
