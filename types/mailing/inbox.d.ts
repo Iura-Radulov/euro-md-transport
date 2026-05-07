@@ -1,6 +1,8 @@
 import datetime from "zod/src/v3/benchmarks/datetime";
 
 export interface MailingInboxMessage {
+  _id: string;
+  id?: string;
   fromDestination: string;
   toDestination: string;
   phone: string;

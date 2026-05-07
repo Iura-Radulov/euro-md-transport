@@ -23,14 +23,15 @@ import ConfirmModal from "@/app/(dashboard)/panel/components/ConfirmModal";
 export default function Page({params}: PageProps) {
   const resolvedParams = use(params);
   const id = resolvedParams.id;
-  const [data, setData] = useState<ContactFormData >({
+  const initialState: ContactFormData= {
     _id: "",
     createdAt: "",
     email: "",
     id: "",
     phone: "",
     status: "",
-    name:''})
+    name:''}
+  const [data, setData] = useState<ContactFormData >(initialState)
   const[isLoading, setIsLoading] = useState<boolean>(true)
   const [isOpen, setOpen] = useState<boolean>(false);
 
@@ -67,7 +68,7 @@ export default function Page({params}: PageProps) {
         setData( result );
       } catch (error) {
         console.error('Failed to fetch items:', error);
-        setData(null); // fallback to empty list
+        setData(initialState); // fallback to empty list
       }
       finally {
         setIsLoading(false);
