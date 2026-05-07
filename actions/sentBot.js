@@ -45,13 +45,17 @@ export async function sentContactForm(values){
     const TelegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
     const TelegramChatId = process.env.TELEGRAM_CHAT_ID;
 
-    console.log('TelegramBotToken', TelegramBotToken)
-    console.log('TelegramChatId', TelegramChatId)
+
+    const safeMessage = message
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
 
     const text = `📩 <b>Контактная форма</b>\n
     👤<b>Имя:</b> <code>${name}</code>\n
     📞 <b>Телефон:</b> <code>${phone}</code>\n
-     💬 <b>Сообщение:</b>\n<i>${message}</i>`
+     💬 <b>Сообщение:</b>\n<i>${safeMessage}</i>`
 
     const sendData = {
         chat_id: TelegramChatId,
