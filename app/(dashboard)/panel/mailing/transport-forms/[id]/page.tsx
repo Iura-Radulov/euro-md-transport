@@ -53,12 +53,12 @@ export default function Page({params}: PageProps) {
 
         const res = await fetch(`/api/transport-form/${id}`);
         if (!res.ok) {
-          throw new Error(`API error: ${res.status} ${res.statusText}`);
+          console.log(`API error: ${res.status} ${res.statusText}`);
         }
         const result:MailingInboxMessage = await res.json();
         console.log(result)
         if(result.status === 'new') {
-          const response = await fetch(`/api/transport-form/${id}`, {
+          await fetch(`/api/transport-form/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
               status: 'view',

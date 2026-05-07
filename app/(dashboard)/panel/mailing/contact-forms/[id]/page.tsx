@@ -25,12 +25,13 @@ export default function Page({params}: PageProps) {
   const id = resolvedParams.id;
   const initialState: ContactFormData= {
     _id: "",
-    createdAt: "",
-    email: "",
-    id: "",
-    phone: "",
     status: "",
-    name:''}
+    name:'',
+    phone: "",
+    message: "",
+    createdAt: ""
+
+  }
   const [data, setData] = useState<ContactFormData >(initialState)
   const[isLoading, setIsLoading] = useState<boolean>(true)
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -53,7 +54,7 @@ export default function Page({params}: PageProps) {
 
         const res = await fetch(`/api/contact-form/${id}`);
         if (!res.ok) {
-          throw new Error(`API error: ${res.status} ${res.statusText}`);
+          console.log(`API error: ${res.status} ${res.statusText}`);
         }
         const result:ContactFormData = await res.json();
         console.log(result)
