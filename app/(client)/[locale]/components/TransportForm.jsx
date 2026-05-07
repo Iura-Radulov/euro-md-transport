@@ -74,6 +74,7 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
 
             if (response.ok) {
                 console.log("Form send successfully")
+                // console.log(response.body)
                 setSuccess(message("form_send_successfully"))
                 setError("")
                 setFromDestination('')

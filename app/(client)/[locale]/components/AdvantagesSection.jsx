@@ -1,11 +1,11 @@
 'use client'
 
-
-import { IoDocumentTextOutline } from "react-icons/io5";
-import { CgPhone } from "react-icons/cg";
-import { IoLocation } from "react-icons/io5";
-import { GiMoneyStack } from "react-icons/gi";
-import { BsBusFrontFill } from "react-icons/bs";
+import { SlLocationPin } from "react-icons/sl";
+import { MdOutlineLunchDining } from "react-icons/md";
+import { MdOutlineWifi } from "react-icons/md";
+import { FaCouch } from "react-icons/fa6";
+import { TfiPackage } from "react-icons/tfi";
+import { GiSteeringWheel } from "react-icons/gi";
 
 import {useTranslations} from "next-intl";
 
@@ -19,7 +19,7 @@ export default function AdvantagesSection(){
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 justify-between ">
                 <div className={'flex p-5'}>
                     <div className={'mr-5'}>
-                        <IoDocumentTextOutline size={'80'} className={'text-sky-500'}/>
+                        <SlLocationPin size={'80'} className={'text-sky-500'}/>
                     </div>
                     <div className={'flex flex-col items-center pb-[25px]'}>
                         <p className={'text-xl lg:text-2xl text-sky-700 font-bold text-center pb-[15px] lg:pb-[25px]'}>{message("advantagesBlockTitle1")}</p>
@@ -29,7 +29,7 @@ export default function AdvantagesSection(){
 
                 <div className={'flex p-5'}>
                     <div className={'mr-5'}>
-                        <IoDocumentTextOutline size={'80'} className={'text-sky-500'}/>
+                        <MdOutlineLunchDining size={'80'} className={'text-sky-500'}/>
                     </div>
                     <div className={'flex flex-col items-center pb-[25px]  '}>
                         <p className={'text-xl lg:text-2xl text-sky-700 font-bold text-center pb-[15px] lg:pb-[25px]'}>{message("advantagesBlockTitle2")}</p>
@@ -39,7 +39,7 @@ export default function AdvantagesSection(){
 
                 <div className={'flex p-5'}>
                     <div className={'mr-5'}>
-                        <IoDocumentTextOutline size={'80'} className={'text-sky-500'}/>
+                        <MdOutlineWifi size={'80'} className={'text-sky-500'}/>
                     </div>
                     <div
                         className={'flex flex-col items-center pb-[25px]'}>
@@ -50,7 +50,7 @@ export default function AdvantagesSection(){
 
                 <div className={'flex p-5'}>
                     <div className={'mr-5'}>
-                        <IoDocumentTextOutline size={'80'} className={'text-sky-500'}/>
+                        <FaCouch size={'80'} className={'text-sky-500'}/>
                     </div>
                     <div
                         className={'flex flex-col items-center pb-[25px]'}>
@@ -61,7 +61,7 @@ export default function AdvantagesSection(){
 
                 <div className={'flex p-5'}>
                     <div className={'mr-5'}>
-                        <IoDocumentTextOutline size={'80'} className={'text-sky-500'}/>
+                        <TfiPackage size={'80'} className={'text-sky-500'}/>
                     </div>
                     <div
                         className={'flex flex-col items-center pb-[25px]'}>
@@ -72,7 +72,7 @@ export default function AdvantagesSection(){
 
                 <div className={'flex p-5'}>
                     <div className={'mr-5'}>
-                        <IoDocumentTextOutline size={'80'} className={'text-sky-500'}/>
+                        <GiSteeringWheel size={'80'} className={'text-sky-500'}/>
                     </div>
                     <div
                         className={'flex flex-col items-center pb-[25px]'}>
