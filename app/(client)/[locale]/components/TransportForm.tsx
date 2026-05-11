@@ -1,5 +1,5 @@
 "use client";
-import {Button, Label, TextInput, Select, type TextInputHelperTextProps} from "flowbite-react";
+import {Button, Label, TextInput, Select} from "flowbite-react";
 import {useEffect, useState} from "react";
 import {useLocale, useTranslations} from "next-intl";
 import getName from "@/utils/getNameByLanguage";
@@ -167,9 +167,9 @@ export default function TransportForm(){
                                 }
                             }}
                             required
-                            color={!validatePhone(phone) && phone !== '' ? "failure" : ""}
-                            helperText={(!validatePhone(phone) && phone !== '') ? 
-                                (error || "Invalid phone number format. Please enter a valid phone number containing only numbers, +, -, and parentheses.") as unknown as React.PropsWithChildren<TextInputHelperTextProps>["content"] 
+                            // color={!validatePhone(phone) && phone !== '' ? "failure" : ""}
+                            helpertext={(!validatePhone(phone) && phone !== '') ?
+                                (error || "Invalid phone number format. Please enter a valid phone number containing only numbers, +, -, and parentheses.")
                                 : undefined}
                         />
                     </div>
