@@ -1,7 +1,6 @@
 import { connectToDB } from "@/utils/database";
 import TransportForm from "@/models/transport_form";
-// import {sentTransportForm} from "@/actions/sentBot"
-import {sentTransportForm} from "../../../../actions/sentBot";
+import {sentTransportForm} from "@/actions/sentBot"
 
 export const POST = async (request) => {
     const { fromDestination, toDestination, phone } = await request.json();

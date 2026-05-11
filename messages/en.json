@@ -54,7 +54,8 @@
      "write_email": "Write your email",
     "message": "Message",
     "form_send_successfully": "Form sent successfully",
-    "form_send_error": "Error sending form. Please try again later."
+    "form_send_error": "Error sending form. Please try again later.",
+    "invalid_phone_format": "Invalid phone number format."
 
   },
   "ContactPage": {

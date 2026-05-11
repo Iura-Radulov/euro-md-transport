@@ -1,16 +1,16 @@
 "use client";
-import {Button, Label, TextInput, Select, TableHeadCell, Textarea} from "flowbite-react";
-import Image from "next/image";
-import {useEffect, useState} from "react";
-import {useLocale, useTranslations} from "next-intl";
-import getName from "@/utils/getNameByLanguage";
+import {Button, Label, TextInput, Textarea} from "flowbite-react";
+
+import { useState} from "react";
+import { useTranslations} from "next-intl";
+
 import ToastError from "./toasts/Toast-error";
 import ToastSuccess from "./toasts/Toast-success";
 
 
-export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setNameRu, setNameRo}){
+    const PHONE_REGEX = /^[+\d\s\-\(\)]+$/;
+    export default function ContactForm(){
     const message = useTranslations("form");
-    const locale = useLocale();
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     // const [email, setEmail] = useState('');
@@ -19,15 +19,19 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
     const [success, setSuccess] = useState("");
 
 
-
+    const validatePhone = (phoneValue) => {
+        // Check that the input contains only allowed characters and has at least one digit
+        return PHONE_REGEX.test(phoneValue) && /\d/.test(phoneValue);
+    };
 
 
   async  function handleSubmit(event){
         event.preventDefault()
-        console.log("submit")
 
-        console.log('name: ', name)
-        console.log('to: ', phone)
+      if (!validatePhone(phone)) {
+          setError(message("invalid_phone_format"));
+          return;
+      }
 
         try {
             const response = await fetch(`/api/contact-form/new`, {
@@ -52,7 +56,7 @@ export default function TransportForm({nameEn,nameRo, nameRu, setNameEn, setName
                 setSuccess("")
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
             setError(message("form_send_error"))
         }
 
