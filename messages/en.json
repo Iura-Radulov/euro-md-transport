@@ -1,7 +1,7 @@
 {
   "HomePage": {
     "title": "PASSENGER TRANSPORTATION",
-    "description": "MOLDOVA - GERMANY - ROMANIA",
+    "description": "MOLDOVA - GERMANY | EuroBus",
     "workTitle": "How it works",
     "workDescriptionTitle1": "Fill out the booking form on the website",
     "workDescriptionTitle2": "We will call you back and discuss the departure date.",
@@ -69,12 +69,12 @@
   },
   "AboutPage": {
     "title": "About Us",
-    "description": "We provide comfortable and safe transportation services between Moldova, Germany, and Romania.",
+    "description": "We provide comfortable and safe transportation services between Moldova, Germany, and Denmark.",
     "text": "Our company strives to provide high-quality service, convenience, and reliability for our customers. We pride ourselves on offering modern vehicles equipped with air conditioning, free Wi-Fi, and spacious luggage compartments. Our team of professional drivers ensures a safe and timely journey for all our passengers. We also offer parcel delivery services, guaranteeing fast and reliable delivery in perfect condition. By choosing us, you choose comfort, safety, and reliability in every trip."
   },
   "ServicePage": {
     "title": "Our Services",
-    "description": "We provide comfortable and safe transportation services between Moldova, Germany, and Romania.",
+    "description": "We provide comfortable and safe transportation services between Moldova, Germany, and Denmark.",
     "text": " Our company strives to provide high-quality service, convenience, and reliability for our customers. We pride ourselves on offering modern vehicles equipped with air conditioning, free Wi-Fi, and spacious luggage compartments. Our team of professional drivers ensures a safe and timely journey for all our passengers. We also offer parcel delivery services, guaranteeing fast and reliable delivery in perfect condition. By choosing us, you choose comfort, safety, and reliability in every trip."
   }
 }
