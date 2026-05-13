@@ -1,35 +1,41 @@
 "use client";
-import {Button, Label, TextInput, Select} from "flowbite-react";
+
+import {Button, Label, TextInput} from "flowbite-react";
+import ReactSelect from "react-select";
 import {useEffect, useState} from "react";
 import {useLocale, useTranslations} from "next-intl";
 import getName from "@/utils/getNameByLanguage";
 import ToastError from "./toasts/Toast-error";
 import ToastSuccess from "./toasts/Toast-success";
 
-// Define TypeScript interfaces for our data structures
-interface LocationData {
-    _id: string;
-    nameRu: string;
-    nameEn: string;
-    nameRo: string;
-}
 
-// Regex pattern to allow numbers, +, -, parentheses, and spaces
 const PHONE_REGEX = /^[+\d\s\-\(\)]+$/;
+
+const selectClassNames = {
+    control: ({ isFocused }) =>
+        `!rounded-lg !border !bg-gray-50 dark:!bg-gray-700 !text-sm !min-h-[42px] ${isFocused ? '!border-blue-500 !ring-1 !ring-blue-500' : '!border-gray-300 dark:!border-gray-600'}`,
+    valueContainer: () => '!px-3 !py-2',
+    menu: () => '!rounded-lg !border !border-gray-200 dark:!border-gray-600 !bg-white dark:!bg-gray-700 !shadow-md !z-50',
+    option: ({ isFocused, isSelected }) =>
+        `!text-sm !cursor-pointer !px-3 !py-2 ${isSelected ? '!bg-blue-600 !text-white' : isFocused ? '!bg-blue-50 dark:!bg-gray-600 !text-gray-900 dark:!text-white' : '!text-gray-900 dark:!text-white'}`,
+    placeholder: () => '!text-gray-500 dark:!text-gray-400',
+    singleValue: () => '!text-gray-900 dark:!text-white',
+    input: () => '!text-gray-900 dark:!text-white',
+};
 
 export default function TransportForm(){
     const message = useTranslations("form");
     const locale = useLocale();
 
-    const [fromDestination, setFromDestination] = useState<string>('');
-    const [toDestination, setToDestination] = useState<string>('');
-    const [phone, setPhone] = useState<string>('');
-    const [locationsMoldova, setLocationsMoldova] = useState<LocationData[]>([]);
-    const [locationsEuropa, setLocationsEuropa] = useState<LocationData[]>([]);
-    const [error, setError] = useState<string>("");
-    const [success, setSuccess] = useState<string>("");
+    const [fromDestination, setFromDestination] = useState('');
+    const [toDestination, setToDestination] = useState('');
+    const [phone, setPhone] = useState('');
+    const [locationsMoldova, setLocationsMoldova] = useState([]);
+    const [locationsEuropa, setLocationsEuropa] = useState([]);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
-    useEffect(():void=>{
+    useEffect(()=>{
         const fetchMoldovaData = async () => {
             try {
                 const res = await fetch(`/api/locations-moldova`);
@@ -61,13 +67,11 @@ export default function TransportForm(){
         fetchEuropaData();
     }, []);
 
-    // Validate phone number format (allowing numbers, +, -, parentheses, and spaces)
-    const validatePhone = (phoneValue: string): boolean => {
-        // Check that the input contains only allowed characters and has at least one digit
+    const validatePhone = (phoneValue) => {
         return PHONE_REGEX.test(phoneValue) && /\d/.test(phoneValue);
     };
 
-    async function handleSubmit(event: React.FormEvent<HTMLFormElement>){
+    async function handleSubmit(event){
         event.preventDefault();
 
         // Phone validation added before submitting
@@ -116,35 +120,53 @@ export default function TransportForm(){
                             <Label htmlFor="fromDestination" >{message("from")}</Label>
                         </div>
 
-                        <Select
-                            id="fromDestination"
-                            value={fromDestination}
-                            onChange={(event) => setFromDestination(event.target.value)}
+                        <ReactSelect
+                            instanceId="fromDestination"
+                            inputId="fromDestination"
+                            options={locationsMoldova.map((loc) => ({
+                                value: loc.nameRu,
+                                label: getName(locale, loc.nameRu, loc.nameEn, loc.nameRo),
+                            }))}
+                            value={locationsMoldova
+                                .filter((loc) => loc.nameRu === fromDestination)
+                                .map((loc) => ({
+                                    value: loc.nameRu,
+                                    label: getName(locale, loc.nameRu, loc.nameEn, loc.nameRo),
+                                }))[0] || null}
+                            onChange={(option) => setFromDestination(option ? option.value : '')}
+                            placeholder={message("select_from")}
+                            isSearchable
                             required
-                        >
-                            <option value="">{message("select_from")}</option>
-                            {locationsMoldova.map((location) => (
-                                <option key={location._id} value={location.nameRu}>{getName(locale, location.nameRu, location.nameEn, location.nameRo )}</option>
-                            ))}
-                        </Select>
+                            classNames={selectClassNames}
+                            unstyled
+                        />
                     </div>
-                    
+
                     <div className=''>
                         <div className="mb-2 block">
                             <Label htmlFor="toDestination" >{message("to")}</Label>
                         </div>
 
-                        <Select
-                            id="toDestination"
-                            value={toDestination}
-                            onChange={(event) => setToDestination(event.target.value)}
+                        <ReactSelect
+                            instanceId="toDestination"
+                            inputId="toDestination"
+                            options={locationsEuropa.map((loc) => ({
+                                value: loc.nameRu,
+                                label: getName(locale, loc.nameRu, loc.nameEn, loc.nameRo),
+                            }))}
+                            value={locationsEuropa
+                                .filter((loc) => loc.nameRu === toDestination)
+                                .map((loc) => ({
+                                    value: loc.nameRu,
+                                    label: getName(locale, loc.nameRu, loc.nameEn, loc.nameRo),
+                                }))[0] || null}
+                            onChange={(option) => setToDestination(option ? option.value : '')}
+                            placeholder={message("select_to")}
+                            isSearchable
                             required
-                        >
-                            <option value="">{message("select_to")}</option>
-                            {locationsEuropa.map((location) => (
-                                <option key={location._id} value={location.nameRu}>{getName(locale, location.nameRu, location.nameEn, location.nameRo )}</option>
-                            ))}
-                        </Select>
+                            classNames={selectClassNames}
+                            unstyled
+                        />
                     </div>
                     
                     <div className=''>
@@ -152,26 +174,15 @@ export default function TransportForm(){
                             <Label htmlFor="phone" >{message("phone")}</Label>
                         </div>
 
-                        <TextInput
-                            id="phone"
-                            placeholder={message("write_phone")}
-                            value={phone}
-                            onChange={(event) => {
-                                const inputValue = event.target.value;
-                                setPhone(inputValue);
-                                // Clear phone validation error when user types with valid format
-                                if (validatePhone(inputValue)) {
-                                    if (error.includes("Invalid phone number format") || error === (message("invalid_phone_format") || "Invalid phone number format. Please enter a valid phone number containing only numbers, +, -, and parentheses.")) {
-                                       setError("");
-                                    }
-                                }
-                            }}
-                            required
-                            // color={!validatePhone(phone) && phone !== '' ? "failure" : ""}
-                            helpertext={(!validatePhone(phone) && phone !== '') ?
-                                (error || "Invalid phone number format. Please enter a valid phone number containing only numbers, +, -, and parentheses.")
-                                : undefined}
-                        />
+                        <div className="[&_input]:!p-[10px]">
+                            <TextInput
+                                id="phone"
+                                placeholder={message("write_phone")}
+                                value={phone}
+                                onChange={(event) => setPhone(event.target.value)}
+                                required
+                            />
+                        </div>
                     </div>
 
                     <div className={'px-5 flex items-center justify-center'}>
