@@ -22,9 +22,12 @@ export interface MailingInboxPageData {
 
 
 
+const ITEMS_PER_PAGE = 20;
+
 export default function Page() {
   const [items, setItems] = useState<ContactFormData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [page, setPage] = useState<number>(0);
 
 
   const options: Intl.DateTimeFormatOptions = {
@@ -62,18 +65,10 @@ export default function Page() {
   if (isLoading) return <div className={'w-full'}><Loading/></div>;
 
 
-  function Menu({inboxMessages}: MailingInboxPageData) {
-    const [page, setPage] = useState<number>(0);
-    const numEntriesPerPage:number = Math.min(20, inboxMessages.length);
-    const numPages:number = Math.floor(inboxMessages.length / numEntriesPerPage);
-
-    const previousPage = ():void => {
-      setPage(page > 0 ? page - 1 : page);
-    };
-
-    const nextPage = ():void => {
-      setPage(page < numPages - 1 ? page + 1 : page);
-    };
+  function Menu({ inboxMessages, page, setPage }: MailingInboxPageData & { page: number; setPage: React.Dispatch<React.SetStateAction<number>> }) {
+    const numPages = Math.ceil(inboxMessages.length / ITEMS_PER_PAGE);
+    const firstItem = inboxMessages.length === 0 ? 0 : page * ITEMS_PER_PAGE + 1;
+    const lastItem = Math.min(page * ITEMS_PER_PAGE + ITEMS_PER_PAGE, inboxMessages.length);
 
     return (
         <div className="block items-center justify-between border-b border-gray-200 p-4 sm:flex dark:border-gray-700 dark:bg-gray-800">
@@ -110,30 +105,31 @@ export default function Page() {
           <div className="hidden items-center space-y-3 space-x-0 sm:flex sm:space-y-0 sm:space-x-3">
 
             <button
-                onClick={previousPage}
-                className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                onClick={() => setPage(p => Math.max(p - 1, 0))}
+                disabled={page === 0}
+                className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 disabled:opacity-40 disabled:cursor-not-allowed dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               <span className="sr-only">Previous</span>
               <HiChevronLeft className="h-7 w-7" />
             </button>
             <button
-                onClick={nextPage}
-                className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                onClick={() => setPage(p => Math.min(p + 1, numPages - 1))}
+                disabled={page >= numPages - 1}
+                className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 disabled:opacity-40 disabled:cursor-not-allowed dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               <span className="sr-only">Next</span>
               <HiChevronRight className="h-7 w-7" />
             </button>
             <span className="font-normal text-gray-500 sm:text-xs md:text-sm dark:text-gray-400">
-          Show&nbsp;
+              Show&nbsp;
               <span className="font-semibold text-gray-900 dark:text-white">
-            {page * inboxMessages.length + 1}-
-                {numEntriesPerPage * page + numEntriesPerPage}
-          </span>
+                {firstItem}-{lastItem}
+              </span>
               &nbsp;of&nbsp;
               <span className="font-semibold text-gray-900 dark:text-white">
-            {inboxMessages.length}
-          </span>
-        </span>
+                {inboxMessages.length}
+              </span>
+            </span>
           </div>
         </div>
     );
@@ -265,12 +261,12 @@ export default function Page() {
     );
   }
 
+  const pagedItems = items.slice(page * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE + ITEMS_PER_PAGE);
+
   return (
       <>
-        <Menu inboxMessages={items} />
-
-        <Inbox inboxMessages={items} />
-
+        <Menu inboxMessages={items} page={page} setPage={setPage} />
+        <Inbox inboxMessages={pagedItems} />
       </>
   );
 }

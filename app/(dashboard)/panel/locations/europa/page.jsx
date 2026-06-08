@@ -43,10 +43,25 @@ import Loading from "@/app/(dashboard)/loading";
 import FlagRo from "@/public/assets/icons/flag_ro.svg";
 import FlagEn from "@/public/assets/icons/flag_en.svg";
 import FlagRu from "@/public/assets/icons/flag_ru.svg";
+const ITEMS_PER_PAGE = 20;
+
 export default function Page(){
 
     const [items, setItems] = useState([])
     const[isLoading, setIsLoading] = useState(true)
+    const [page, setPage] = useState(0)
+    const [search, setSearch] = useState('')
+
+    const filteredItems = search.trim() === ''
+        ? items
+        : items.filter(item => {
+            const q = search.toLowerCase()
+            return (
+                item.nameRu?.toLowerCase().includes(q) ||
+                item.nameEn?.toLowerCase().includes(q) ||
+                item.nameRo?.toLowerCase().includes(q)
+            )
+        })
 
     useEffect(()=>{
         const fetchData =async ()=>{
@@ -119,6 +134,8 @@ export default function Page(){
                                         id="items-search"
                                         name="items-search"
                                         placeholder="Search for items"
+                                        value={search}
+                                        onChange={e => { setSearch(e.target.value); setPage(0); }}
                                     />
                                 </div>
                             </form>
@@ -166,13 +183,13 @@ export default function Page(){
                         <div className="overflow-hidden shadow">
                             {isLoading ?
                                 <div className={'w-full'}> <Loading /> </div>
-                                :  <AllItemsTable itemList={items} />}
+                                :  <AllItemsTable itemList={filteredItems.slice(page * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE + ITEMS_PER_PAGE)} />}
 
                         </div>
                     </div>
                 </div>
             </div>
-            <Pagination itemList={items} />
+            <Pagination itemList={filteredItems} page={page} setPage={setPage} />
         </>
         )
 
@@ -259,63 +276,58 @@ export default function Page(){
 
 
 
-    function Pagination({ itemList }) {
-        const [page, setPage] = useState(0);
-        const numEntriesPerPage = Math.min(20, itemList.length);
-        const numPages = Math.floor(itemList.length / numEntriesPerPage);
-
-        const previousPage = () => {
-            setPage(page > 0 ? page - 1 : page);
-        };
-
-        const nextPage = () => {
-            setPage(page < numPages - 1 ? page + 1 : page);
-        };
+    function Pagination({ itemList, page, setPage }) {
+        const numPages = Math.ceil(itemList.length / ITEMS_PER_PAGE);
+        const firstItem = itemList.length === 0 ? 0 : page * ITEMS_PER_PAGE + 1;
+        const lastItem = Math.min(page * ITEMS_PER_PAGE + ITEMS_PER_PAGE, itemList.length);
 
         return (
             <div className="sticky right-0 bottom-0 w-full items-center border-t border-gray-200 bg-white p-4 sm:flex sm:justify-between dark:border-gray-700 dark:bg-gray-800">
                 <div className="mb-4 flex items-center sm:mb-0">
                     <button
-                        onClick={previousPage}
-                        className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                        onClick={() => setPage(p => Math.max(p - 1, 0))}
+                        disabled={page === 0}
+                        className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 disabled:opacity-40 disabled:cursor-not-allowed dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                         <span className="sr-only">Previous page</span>
                         <HiChevronLeft className="h-7 w-7" />
                     </button>
                     <button
-                        onClick={nextPage}
-                        className="mr-2 inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                        onClick={() => setPage(p => Math.min(p + 1, numPages - 1))}
+                        disabled={page >= numPages - 1}
+                        className="mr-2 inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 disabled:opacity-40 disabled:cursor-not-allowed dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                         <span className="sr-only">Next page</span>
                         <HiChevronRight className="h-7 w-7" />
                     </button>
                     <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-          Showing&nbsp;
+                        Showing&nbsp;
                         <span className="font-semibold text-gray-900 dark:text-white">
-            {page * itemList.length + 1}-
-                            {numEntriesPerPage * page + numEntriesPerPage}
-          </span>
+                            {firstItem}-{lastItem}
+                        </span>
                         &nbsp;of&nbsp;
                         <span className="font-semibold text-gray-900 dark:text-white">
-            {itemList.length}
-          </span>
-        </span>
+                            {itemList.length}
+                        </span>
+                    </span>
                 </div>
                 <div className="flex items-center space-x-3">
-                    <Link
-                        href="#"
-                        className="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 inline-flex flex-1 items-center justify-center rounded-lg px-3 py-2 text-center text-sm font-medium text-white focus:ring-4"
+                    <button
+                        onClick={() => setPage(p => Math.max(p - 1, 0))}
+                        disabled={page === 0}
+                        className="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 inline-flex flex-1 items-center justify-center rounded-lg px-3 py-2 text-center text-sm font-medium text-white focus:ring-4 disabled:opacity-40 disabled:cursor-not-allowed"
                     >
                         <HiChevronLeft className="mr-1 -ml-1 h-5 w-5" />
                         Previous
-                    </Link>
-                    <Link
-                        href="#"
-                        className="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 inline-flex flex-1 items-center justify-center rounded-lg px-3 py-2 text-center text-sm font-medium text-white focus:ring-4"
+                    </button>
+                    <button
+                        onClick={() => setPage(p => Math.min(p + 1, numPages - 1))}
+                        disabled={page >= numPages - 1}
+                        className="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 inline-flex flex-1 items-center justify-center rounded-lg px-3 py-2 text-center text-sm font-medium text-white focus:ring-4 disabled:opacity-40 disabled:cursor-not-allowed"
                     >
                         Next
                         <HiChevronRight className="-mr-1 ml-1 h-5 w-5" />
-                    </Link>
+                    </button>
                 </div>
             </div>
         );
